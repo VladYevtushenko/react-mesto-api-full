@@ -1,0 +1,10 @@
+.profile__item {
+    margin-left: 30px;
+    min-height: 73px;
+}
+
+@media screen and (max-width: 573px) {
+    .profile__item {
+        margin: 26px auto 33px;
+    }
+}

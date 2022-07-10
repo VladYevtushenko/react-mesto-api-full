@@ -1,0 +1,13 @@
+.elements__photo {
+    max-width: 282px;
+    height: 282px;
+    object-fit: cover;
+    object-position: top;
+    transition: .2s;
+    cursor: pointer;
+}
+
+.elements__photo:hover {
+    opacity: .5;
+    transition: .2s;
+}

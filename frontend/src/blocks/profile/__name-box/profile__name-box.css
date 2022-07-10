@@ -1,0 +1,13 @@
+.profile__name-box {
+    display: flex;
+    align-items: center;
+    min-width: 336px;
+    position: relative;
+}
+
+@media screen and (max-width: 573px) {
+    .profile__name-box {
+        min-width: 282px;
+        justify-content: center;
+    }
+}

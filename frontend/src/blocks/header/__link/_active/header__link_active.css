@@ -1,0 +1,20 @@
+.header__link_active {
+    display: inline;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.header__link_active:hover {
+    cursor: pointer;
+    opacity: .6;
+}
+
+@media screen and (max-width: 475px) {
+    .header__link_active {
+        margin-right: 30px;
+    }
+}

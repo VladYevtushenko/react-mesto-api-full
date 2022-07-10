@@ -1,0 +1,28 @@
+.tooltip__close-btn {
+    background-image: url(../../../images/Close-Icon.svg);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background-color: #000000;
+    position: absolute;
+    top: -40px;
+    left: 438px;
+    padding: 0;
+}
+
+.tooltip__close-btn:hover {
+    cursor: pointer;
+    opacity: .6;
+    transition: opacity .3s ease;
+}
+
+@media screen and (max-width: 540px) {
+    .tooltip__close-btn {
+        width: 20px;
+        height: 20px;
+        top: -36px;
+        left: 262px;
+    }
+}
