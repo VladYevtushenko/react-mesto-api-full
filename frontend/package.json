@@ -1,7 +1,6 @@
 {
   "name": "mesto",
   "version": "0.1.0",
-  "homepage": "https://vladyevtushenko.github.io/react-mesto-auth",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
@@ -19,7 +18,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "npm run build && scp -r build/* vlad_mesto@84.201.164.77:/home/vlad_mesto/mesto-frontend"
   },
   "eslintConfig": {
     "extends": [
@@ -38,8 +37,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "gh-pages": "^4.0.0"
   }
 }

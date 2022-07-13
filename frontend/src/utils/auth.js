@@ -1,4 +1,4 @@
-export const baseUrl = 'https://auth.nomoreparties.co';
+export const baseUrl = 'https://api.mesto.by.vlad.nomoredomains.xyz';
 
 function getResponseData(res) {
     if (res.ok) {
@@ -11,7 +11,7 @@ function getResponseData(res) {
     }
 }
 
-export  function register(password, email) {
+export function register(password, email) {
     return fetch(`${baseUrl}/signup`, {
         method: 'POST',
         headers: {"Content-Type": "application/json"},

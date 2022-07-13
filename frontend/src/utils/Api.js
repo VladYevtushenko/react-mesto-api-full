@@ -65,13 +65,13 @@ class Api {
         if(setLike) {
             return fetch(`${this._baseUrl}/cards/${id}/likes`, {
                 method: 'PUT',
-                headers: this._headers,
+                headers: this._headers.authorization,
             })
             .then(this._getResponseData);
         } else {
             return fetch(`${this._baseUrl}/cards/${id}/likes`, {
                 method: 'DELETE',
-                headers: this._headers,
+                headers: this._headers.authorization,
             })
             .then(this._getResponseData);
         }
@@ -86,9 +86,8 @@ class Api {
 }
 
 const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-39',
+    baseUrl: 'https://api.mesto.by.vlad.nomoredomains.xyz',
     headers: {
-        authorization: '9cc98c8c-c941-4afd-80ce-342069e7a748',
         'Content-Type': 'application/json'
     }
 });
