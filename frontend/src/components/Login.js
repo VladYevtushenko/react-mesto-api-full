@@ -23,7 +23,6 @@ function Login({ title, onLogin, isValid, buttonText, errorMessage }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log('hi');
 
         onLogin(password, email);
     }

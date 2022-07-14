@@ -66,15 +66,15 @@ function App() {
 
 //
 
-useEffect(() => {
-	Promise.all([api.getProfile(), api.getInitialCards()])
-		.then((res) => {
-			const [userData, cards] = res;
-			setCurrentUser(userData);
-			setCards(cards);
-		})
-		.catch((err) => console.log(err));
-}, []);
+// useEffect(() => {
+// 	Promise.all([api.getProfile(), api.getInitialCards()])
+// 		.then((res) => {
+// 			const [userData, cards] = res;
+// 			setCurrentUser(userData);
+// 			setCards(cards);
+// 		})
+// 		.catch((err) => console.log(err));
+// }, []);
 
 // profile
 
@@ -188,10 +188,14 @@ useEffect(() => {
 	function handleLogin(password, email) {
 		setChangeLoginBtnName('Вход...');
 		return authorize(password, email)
-			.then(data => {
-				if(data.token) {
+			.then((data) => {
+				if(data) {
 					localStorage.setItem('jwt', data.token);
-					checkToken();
+					setEmail(data.email);
+					setLoggedIn(true);
+					history.push('/');
+				} else {
+					setIsRegistgerFormOpen(true);
 				}
 			})
 			.catch(err => {
@@ -204,26 +208,30 @@ useEffect(() => {
 	}
 
 	function checkToken() {
-		if(localStorage.getItem('jwt')) {
-			let token = localStorage.getItem('jwt');
-			getContent(token)
-				.then(res => {
-					setEmail(res.data.email);
+		const jwt = localStorage.getItem('jwt');
+		if (jwt) {
+			getContent(jwt)
+				.then((res) => {
 					setLoggedIn(true);
+					history.push('/');
+					setEmail(res.email);
 				})
-				.catch(err => console.log(err.message));
+				.catch((err) => console.log(err));
 		}
 	}
 
 	useEffect(() => {
 		checkToken();
-	}, []);
-
-	useEffect(() => {
 		if (loggedIn) {
-			history.push('/')
+			Promise.all([api.getProfile(), api.getInitialCards()])
+				.then((res) => {
+					const [userData, cards] = res;
+					setCurrentUser(userData);
+					setCards(cards);
+				})
+				.catch((err) => console.log(err));
 		}
-	},[loggedIn]);
+	}, [loggedIn]);
 
 	function handleSignOut() {
 		localStorage.removeItem('jwt');
