@@ -45,6 +45,20 @@ function App() {
 
 	const history = useHistory();
 	
+//
+
+useEffect(() => {
+	if (loggedIn) {
+		Promise.all([api.getProfile(), api.getInitialCards()])
+			.then(([userData, cards]) => {
+				// const [userData, cards] = res;
+				setCurrentUser(userData);
+				setCards(cards);
+			})
+			.catch((err) => console.log(err));
+	}
+}, [loggedIn]);
+
 // ava
 
 	function handleEditAvatarClick() {
@@ -63,18 +77,6 @@ function App() {
 				setChangeAvaButtonName('Сохранить')
 			});
 	}
-
-//
-
-// useEffect(() => {
-// 	Promise.all([api.getProfile(), api.getInitialCards()])
-// 		.then((res) => {
-// 			const [userData, cards] = res;
-// 			setCurrentUser(userData);
-// 			setCards(cards);
-// 		})
-// 		.catch((err) => console.log(err));
-// }, []);
 
 // profile
 
@@ -162,8 +164,8 @@ function App() {
 	function handleRegister(password, email) {
 		setChangeAuthBtnName('Сохраняю...');
 		return register(password, email)
-			.then(res => {
-				if(res.data._id) {
+			.then((res) => {
+				if(res) {
 					setIsSignup(true);
 					setIsRegistgerFormOpen(true);
 					setTimeout(() => {
@@ -191,9 +193,10 @@ function App() {
 			.then((data) => {
 				if(data) {
 					localStorage.setItem('jwt', data.token);
-					setEmail(data.email);
+					checkToken();
+					// setEmail(data.email);
 					setLoggedIn(true);
-					history.push('/');
+					// history.push('/');
 				} else {
 					setIsRegistgerFormOpen(true);
 				}
@@ -206,32 +209,31 @@ function App() {
 			})
 			.finally(() => setChangeLoginBtnName('Вход...'));
 	}
+	
+	useEffect(() => {
+		if (loggedIn) {
+			history.push('/');
+		}
+	}, [loggedIn, history]);
+
+	useEffect(() => {
+		checkToken();
+	}, []);
 
 	function checkToken() {
 		const jwt = localStorage.getItem('jwt');
 		if (jwt) {
 			getContent(jwt)
 				.then((res) => {
-					setLoggedIn(true);
-					history.push('/');
-					setEmail(res.email);
+					if (res.data.email) {
+						setLoggedIn(true);
+						history.push('/');
+						setEmail(res.data.email);
+					}
 				})
 				.catch((err) => console.log(err));
 		}
 	}
-
-	useEffect(() => {
-		checkToken();
-		if (loggedIn) {
-			Promise.all([api.getProfile(), api.getInitialCards()])
-				.then((res) => {
-					const [userData, cards] = res;
-					setCurrentUser(userData);
-					setCards(cards);
-				})
-				.catch((err) => console.log(err));
-		}
-	}, [loggedIn]);
 
 	function handleSignOut() {
 		localStorage.removeItem('jwt');

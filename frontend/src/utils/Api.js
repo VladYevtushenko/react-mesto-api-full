@@ -6,7 +6,7 @@ class Api {
 
     getProfile() {
         return fetch(`${this._baseUrl}/users/me`, {
-            credentials: 'include',
+            "credentials": "include",
             headers: this._headers
         })
         .then(this._getResponseData)
@@ -14,7 +14,7 @@ class Api {
 
     getInitialCards() {
         return fetch(`${this._baseUrl}/cards`, {
-            credentials: 'include',
+            "credentials": "include",
             headers: this._headers
         })
         .then(this._getResponseData)
@@ -23,7 +23,7 @@ class Api {
     editProfile(userData) {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
-            credentials: 'include',
+            "credentials": "include",
             headers: this._headers,
             body: JSON.stringify({
                 name: userData.name,
@@ -36,7 +36,7 @@ class Api {
     editAvatar(avatarLink) {
         return fetch(`${this._baseUrl}/users/me/avatar`, {
             method: 'PATCH',
-            credentials: 'include',
+            "credentials": "include",
             headers: this._headers,
             body: JSON.stringify({
                 avatar: avatarLink.avatar
@@ -48,7 +48,7 @@ class Api {
     postCard(card) {
         return fetch(`${this._baseUrl}/cards`, {
             method: 'POST',
-            credentials: 'include',
+            "credentials": "include",
             headers: this._headers,
             body: JSON.stringify({
                 name: card.name,
@@ -61,7 +61,7 @@ class Api {
     deleteCard(id) {
         return fetch(`${this._baseUrl}/cards/${id}`, {
             method: 'DELETE',
-            credentials: 'include',
+            "credentials": "include",
             headers: this._headers,
         })
         .then(this._getResponseData)
@@ -71,15 +71,15 @@ class Api {
         if(setLike) {
             return fetch(`${this._baseUrl}/cards/${id}/likes`, {
                 method: 'PUT',
-                credentials: 'include',
-                headers: this._headers.authorization,
+                "credentials": "include",
+                headers: this._headers,
             })
             .then(this._getResponseData);
         } else {
             return fetch(`${this._baseUrl}/cards/${id}/likes`, {
                 method: 'DELETE',
-                credentials: 'include',
-                headers: this._headers.authorization,
+                "credentials": "include",
+                headers: this._headers,
             })
             .then(this._getResponseData);
         }
