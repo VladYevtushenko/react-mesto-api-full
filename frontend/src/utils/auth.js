@@ -34,10 +34,10 @@ export function authorize(password, email) {
 export function getContent(token) {
     return fetch(`${baseUrl}/users/me`, {
         method: 'GET',
-        // headers: {
-        //     "Content-Type": "application/json",
-        //     "Authorization" : `Bearer ${token}`,
-        // },
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization" : `Bearer ${token}`,
+        },
         "credentials": "include"
     })
     .then(res => getResponseData(res))
