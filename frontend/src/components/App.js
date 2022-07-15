@@ -151,11 +151,13 @@ useEffect(() => {
 	}
 
 	function handleCardLike(card) {
-        const isLiked = card.likes.some(i => i._id === currentUser._id);
+        const isLiked = card.likes.some(like => like === currentUser._id);
         
-        api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-            setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-        })
+        api
+			.changeLikeCardStatus(card._id, !isLiked)
+			.then((newCard) => {
+            	setCards((state) => state.map(c => c._id === card._id ? newCard : c));
+        	})
 			.catch((err) => console.log(err));
     }
 
@@ -194,7 +196,7 @@ useEffect(() => {
 				if(data) {
 					localStorage.setItem('jwt', data.token);
 					checkToken();
-					// setEmail(data.email);
+					setEmail(data.email);
 					setLoggedIn(true);
 					// history.push('/');
 				} else {
@@ -225,10 +227,10 @@ useEffect(() => {
 		if (jwt) {
 			getContent(jwt)
 				.then((res) => {
-					if (res.data.email) {
+					if (res.email) {
 						setLoggedIn(true);
 						history.push('/');
-						setEmail(res.data.email);
+						setEmail(res.email);
 					}
 				})
 				.catch((err) => console.log(err));
