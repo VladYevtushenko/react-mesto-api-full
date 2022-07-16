@@ -1,4 +1,4 @@
-export const baseUrl = 'https://api.mesto.by.vlad.nomoredomains.xyz';
+export const baseUrl = 'http://api.mesto.by.vlad.nomoredomains.xyz';
 
 function getResponseData(res) {
     if (res.ok) {
@@ -16,7 +16,7 @@ export function register(password, email) {
         method: 'POST',
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({ password, email }),
-        "credentials": "include"
+        credentials: 'include'
     })
     .then(res => getResponseData(res))
 }
@@ -26,19 +26,19 @@ export function authorize(password, email) {
         method: 'POST',
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({ password, email }),
-        "credentials": "include"
+        credentials: 'include'
     })
     .then(res => getResponseData(res));
 }
 
-export function getContent(token) {
+export function getContent() {
     return fetch(`${baseUrl}/users/me`, {
         method: 'GET',
         headers: {
-            "Content-Type": "application/json",
-            "Authorization" : `Bearer ${token}`,
+            "Content-Type": "application/json"
+            //"Authorization" : `Bearer ${token}`,
         },
-        "credentials": "include"
+        credentials: 'include'
     })
     .then(res => getResponseData(res))
 }

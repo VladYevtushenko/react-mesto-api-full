@@ -193,10 +193,10 @@ useEffect(() => {
 		setChangeLoginBtnName('Вход...');
 		return authorize(password, email)
 			.then((data) => {
-				if(data) {
+				if(data.token) {
 					localStorage.setItem('jwt', data.token);
 					checkToken();
-					setEmail(data.email);
+					// setEmail(data.email);
 					setLoggedIn(true);
 					// history.push('/');
 				} else {
@@ -218,19 +218,19 @@ useEffect(() => {
 		}
 	}, [loggedIn, history]);
 
-	useEffect(() => {
-		checkToken();
-	}, []);
+	// useEffect(() => {
+	// 	checkToken();
+	// }, []);
 
 	function checkToken() {
 		const jwt = localStorage.getItem('jwt');
 		if (jwt) {
 			getContent(jwt)
 				.then((res) => {
-					if (res.email) {
+					if (res.data?.email) {
 						setLoggedIn(true);
 						history.push('/');
-						setEmail(res.email);
+						setEmail(res.data.email);
 					}
 				})
 				.catch((err) => console.log(err));
