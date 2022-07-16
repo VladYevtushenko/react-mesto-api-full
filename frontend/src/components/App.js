@@ -196,7 +196,7 @@ useEffect(() => {
 				if(data.token) {
 					localStorage.setItem('jwt', data.token);
 					checkToken();
-					// setEmail(data.email);
+					setEmail(data.email);
 					setLoggedIn(true);
 					// history.push('/');
 				} else {
@@ -218,9 +218,9 @@ useEffect(() => {
 		}
 	}, [loggedIn, history]);
 
-	// useEffect(() => {
-	// 	checkToken();
-	// }, []);
+	useEffect(() => {
+		checkToken();
+	}, []);
 
 	function checkToken() {
 		const jwt = localStorage.getItem('jwt');
