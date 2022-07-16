@@ -94,7 +94,7 @@ class Api {
 }
 
 const api = new Api({
-    baseUrl: 'http://api.mesto.by.vlad.nomoredomains.xyz',
+    baseUrl: 'https://api.mesto.by.vlad.nomoredomains.xyz',
     headers: {
         'Content-Type': 'application/json'
     }

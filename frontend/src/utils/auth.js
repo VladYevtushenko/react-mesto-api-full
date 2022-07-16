@@ -1,4 +1,4 @@
-export const baseUrl = 'http://api.mesto.by.vlad.nomoredomains.xyz';
+export const baseUrl = 'https://api.mesto.by.vlad.nomoredomains.xyz';
 
 function getResponseData(res) {
     if (res.ok) {
