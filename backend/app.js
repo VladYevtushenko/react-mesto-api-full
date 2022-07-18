@@ -13,6 +13,7 @@ const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
 const { urlValidation } = require('./utils/urlValidation');
 const NotFoundError = require('./errors/notFoundError');
+const { allowedCors } = require('./middlewares/consts');
 
 const app = express();
 const { PORT = 3000 } = process.env;
@@ -22,12 +23,13 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useUnifiedTopology: true,
 });
 
-app.use(cors({ origin: 'https://mesto.by.vlad.nomorepartiesxyz.ru', credentials: true }));
+// app.use(cors({ origin: 'https://mesto.by.vlad.nomorepartiesxyz.ru', credentials: true }));
 
-// app.use(cors({
-//   origin: allowedCors,
-//   credentials: true,
-// }));
+app.use(cors({
+  origin: allowedCors,
+  credentials: true,
+  sameSite: 'None',
+}));
 
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
