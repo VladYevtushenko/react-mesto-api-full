@@ -23,8 +23,8 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useUnifiedTopology: true,
 });
 
-app.use(cors);
-// app.use(cors({ origin: 'https://mesto.by.vlad.nomorepartiesxyz.ru', credentials: true }));
+// app.use(cors);
+app.use(cors({ origin: 'https://mesto.by.vlad.nomorepartiesxyz.ru', credentials: true }));
 
 // app.use(cors({
 //   // origin: allowedCors,
