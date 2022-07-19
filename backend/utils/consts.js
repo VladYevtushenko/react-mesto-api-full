@@ -5,4 +5,7 @@ module.exports.allowedCors = [
   'localhost:3000',
   'http://localhost:3000',
   'https://localhost:3000',
+  'api.mesto.by.vlad.nomoredomains.xyz',
+  'http://api.mesto.by.vlad.nomoredomains.xyz',
+  'https://api.mesto.by.vlad.nomoredomains.xyz',
 ];
