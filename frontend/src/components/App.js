@@ -204,7 +204,7 @@ function App() {
 				.then((res) => {
 					if (res) {
 						setLoggedIn(true);
-						setEmail(res.data.email);
+						setEmail(res.email);
 					}
 				})
 				.then((res) => {
@@ -236,7 +236,7 @@ function App() {
 				if(res.token) {
 					localStorage.setItem('jwt', res.token);
 					checkToken();
-					// setEmail(res.email);
+					setEmail(res.email);
 					setLoggedIn(true);
 					history.push('/');
 				} else {
