@@ -198,7 +198,7 @@ useEffect(() => {
 					checkToken();
 					setEmail(data.email);
 					setLoggedIn(true);
-					// history.push('/');
+					history.push('/');
 				} else {
 					setIsRegistgerFormOpen(true);
 				}
