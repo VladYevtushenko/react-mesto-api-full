@@ -63,7 +63,7 @@ module.exports.login = (req, res, next) => {
       });
       res
         .status(200)
-        .send({ token, NODE_ENV, JWT_SECRET });
+        .send({ token });
     })
     .catch(next);
 };

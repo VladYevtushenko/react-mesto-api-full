@@ -11,7 +11,7 @@ function getResponseData(res) {
     }
 }
 
-export function register(password, email) {
+export function register(email, password) {
     return fetch(`${baseUrl}/signup`, {
         method: 'POST',
         headers: {
@@ -24,17 +24,23 @@ export function register(password, email) {
     .then(res => getResponseData(res))
 }
 
-export function authorize(password, email) {
+export function authorize(email, password) {
     return fetch (`${baseUrl}/signin`, {
         method: 'POST',
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ password, email }),
+        body: JSON.stringify({email, password}),
         credentials: 'include'
     })
-    .then(res => getResponseData(res));
+    .then((data) => {
+        if (data.token) {
+            localStorage.setItem('token', data.token);
+            return data;
+        }
+    })
+    // .then(res => getResponseData(res));
 }
 
 export function getContent() {

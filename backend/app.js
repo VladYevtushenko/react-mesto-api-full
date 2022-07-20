@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { celebrate, Joi, errors } = require('celebrate');
-const cors = require('./middlewares/cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
@@ -13,6 +12,8 @@ const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
 const { urlValidation } = require('./utils/urlValidation');
 const NotFoundError = require('./errors/notFoundError');
+const cors = require('./middlewares/cors');
+
 // const { allowedCors } = require('./utils/consts');
 
 const app = express();
@@ -23,13 +24,13 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useUnifiedTopology: true,
 });
 
-// app.use(cors);
+app.use(cors);
 // app.use(cors({ credentials: true }));
 
-app.use(cors({
-  origin: 'https://mesto.by.vlad.nomorepartiesxyz.ru',
-  credentials: true,
-}));
+// app.use(cors({
+//   origin: 'https://mesto.by.vlad.nomorepartiesxyz.ru',
+//   credentials: true,
+// }));
 
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));

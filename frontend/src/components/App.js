@@ -47,8 +47,7 @@ function App() {
 	
 //
 
-useEffect(() => {
-	if (loggedIn) {
+	useEffect(() => {
 		Promise.all([api.getProfile(), api.getInitialCards()])
 			.then(([userData, cards]) => {
 				// const [userData, cards] = res;
@@ -56,9 +55,9 @@ useEffect(() => {
 				setCards(cards);
 			})
 			.catch((err) => console.log(err));
-	}
-}, [loggedIn]);
+	}, [loggedIn]);
 
+	useEffect(() => checkToken(), [loggedIn])
 // ava
 
 	function handleEditAvatarClick() {
@@ -163,9 +162,9 @@ useEffect(() => {
 
 // register & login
 
-	function handleRegister(password, email) {
+	function handleRegister(email, password) {
 		setChangeAuthBtnName('Сохраняю...');
-		return register(password, email)
+		return register(email, password)
 			.then((res) => {
 				if(res) {
 					setIsSignup(true);
@@ -189,13 +188,53 @@ useEffect(() => {
 			});
 	}
 
-	function handleLogin(password, email) {
+	
+	
+	// useEffect(() => {
+	// 	if (loggedIn) {
+	// 		history.push('/');
+	// 	}
+	// }, [loggedIn, history]);
+
+	function checkToken() {
+		if (localStorage.getItem('token')) {
+			const token = localStorage.getItem('token')
+			getContent(token)
+				.then((res) => {
+					if (res) {
+						setLoggedIn(true);
+						setEmail(res.data.email);
+					}
+				})
+				.then((res) => {
+					history.push('/');
+				})
+				.catch((err) => console.log(err));
+		}
+	}
+
+	// function checkToken() {
+	// 	const jwt = localStorage.getItem('jwt');
+	// 	if (jwt) {
+	// 		getContent(jwt)
+	// 			.then((res) => {
+	// 				if (res.data?.email) {
+	// 					setLoggedIn(true);
+	// 					history.push('/');
+	// 					setEmail(res.data.email);
+	// 				}
+	// 			})
+	// 			.catch((err) => console.log(err));
+	// 	}
+	// }
+
+	function handleLogin(email, password) {
 		setChangeLoginBtnName('Вход...');
-		return authorize(password, email)
+		return authorize(email, password)
 			.then((data) => {
 				if(data.token) {
-					localStorage.setItem('jwt', data.token);
-					checkToken();
+					// localStorage.setItem('jwt', data.token);
+					// checkToken();
 					setEmail(data.email);
 					setLoggedIn(true);
 					history.push('/');
@@ -210,31 +249,6 @@ useEffect(() => {
 				setIsRegistgerFormOpen(true);
 			})
 			.finally(() => setChangeLoginBtnName('Вход...'));
-	}
-	
-	useEffect(() => {
-		if (loggedIn) {
-			history.push('/');
-		}
-	}, [loggedIn, history]);
-
-	useEffect(() => {
-		checkToken();
-	}, []);
-
-	function checkToken() {
-		const jwt = localStorage.getItem('jwt');
-		if (jwt) {
-			getContent(jwt)
-				.then((res) => {
-					if (res.data?.email) {
-						setLoggedIn(true);
-						history.push('/');
-						setEmail(res.data.email);
-					}
-				})
-				.catch((err) => console.log(err));
-		}
 	}
 
 	function handleSignOut() {
