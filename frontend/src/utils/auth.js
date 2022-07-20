@@ -34,13 +34,13 @@ export function authorize(email, password) {
         body: JSON.stringify({email, password}),
         credentials: 'include'
     })
-    .then((data) => {
-        if (data.token) {
-            localStorage.setItem('jwt', data.token);
-            return data;
-        }
-    })
-    // .then(res => getResponseData(res));
+    // .then((data) => {
+    //     if (data.token) {
+    //         localStorage.setItem('jwt', data.token);
+    //         return data;
+    //     }
+    // })
+    .then(res => getResponseData(res));
 }
 
 export function getContent() {

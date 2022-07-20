@@ -229,42 +229,27 @@ function App() {
 	// 	}
 	// }
 
-	// function handleLogin(email, password) {
-	// 	setChangeLoginBtnName('Вход...');
-	// 	return authorize(email, password)
-	// 		.then((data) => {
-	// 			if(data.token) {
-	// 				localStorage.setItem('jwt', data.token);
-	// 				checkToken();
-	// 				setEmail(data.email);
-	// 				setLoggedIn(true);
-	// 				history.push('/');
-	// 			} else {
-	// 				setIsRegistgerFormOpen(true);
-	// 			}
-	// 		})
-	// 		.catch(err => {
-	// 			console.log(err.message);
-	// 			setSignupError('Некорректный email или пароль');
-	// 			setIsSignup(false);
-	// 			setIsRegistgerFormOpen(true);
-	// 		})
-	// 		.finally(() => setChangeLoginBtnName('Вход...'));
-	// }
-
 	function handleLogin(email, password) {
-		if (!email || !password) {
-			return
-		}
-
-		authorize(email, password)
-			.then((res) => {
-				if (res.token) {
-					setLoggedIn(true)
-					history.push('/')
+		setChangeLoginBtnName('Вход...');
+		return authorize(email, password)
+			.then((data) => {
+				if(data.token) {
+					localStorage.setItem('jwt', data.token);
+					checkToken();
+					setEmail(data.email);
+					setLoggedIn(true);
+					history.push('/');
+				} else {
+					setIsRegistgerFormOpen(true);
 				}
 			})
-			.catch(err => console.log(err))
+			.catch(err => {
+				console.log(err.message);
+				setSignupError('Некорректный email или пароль');
+				setIsSignup(false);
+				setIsRegistgerFormOpen(true);
+			})
+			.finally(() => setChangeLoginBtnName('Вход...'));
 	}
 
 	function handleSignOut() {
