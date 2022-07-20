@@ -234,9 +234,9 @@ function App() {
 		return authorize(email, password)
 			.then((res) => {
 				if(res.token) {
-					// localStorage.setItem('jwt', data.token);
-					// checkToken();
-					// setEmail(data.email);
+					localStorage.setItem('jwt', res.token);
+					checkToken();
+					// setEmail(res.email);
 					setLoggedIn(true);
 					history.push('/');
 				} else {
