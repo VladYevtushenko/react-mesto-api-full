@@ -57,6 +57,7 @@ function App() {
 			.catch((err) => console.log(err));
 	}, [loggedIn]);
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => checkToken(), [loggedIn])
 // ava
 
@@ -231,11 +232,11 @@ function App() {
 	function handleLogin(email, password) {
 		setChangeLoginBtnName('Вход...');
 		return authorize(email, password)
-			.then((data) => {
-				if(data.token) {
+			.then((res) => {
+				if(res.token) {
 					// localStorage.setItem('jwt', data.token);
 					// checkToken();
-					setEmail(data.email);
+					// setEmail(data.email);
 					setLoggedIn(true);
 					history.push('/');
 				} else {
