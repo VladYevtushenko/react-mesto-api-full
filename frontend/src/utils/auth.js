@@ -14,7 +14,10 @@ function getResponseData(res) {
 export function register(password, email) {
     return fetch(`${baseUrl}/signup`, {
         method: 'POST',
-        headers: {"Content-Type": "application/json"},
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({ password, email }),
         credentials: 'include'
     })
@@ -24,7 +27,10 @@ export function register(password, email) {
 export function authorize(password, email) {
     return fetch (`${baseUrl}/signin`, {
         method: 'POST',
-        headers: {"Content-Type": "application/json"},
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({ password, email }),
         credentials: 'include'
     })
@@ -35,9 +41,13 @@ export function getContent() {
     return fetch(`${baseUrl}/users/me`, {
         method: 'GET',
         headers: {
+            "Accept": "application/json",
             "Content-Type": "application/json"
-            //"Authorization" : `Bearer ${token}`,
         },
+        // headers: {
+        //     "Content-Type": "application/json"
+        //     //"Authorization" : `Bearer ${token}`,
+        // },
         credentials: 'include'
     })
     .then(res => getResponseData(res))
