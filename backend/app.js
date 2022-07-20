@@ -13,7 +13,7 @@ const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
 const { urlValidation } = require('./utils/urlValidation');
 const NotFoundError = require('./errors/notFoundError');
-const { allowedCors } = require('./utils/consts');
+// const { allowedCors } = require('./utils/consts');
 
 const app = express();
 const { PORT = 3000 } = process.env;
@@ -27,7 +27,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 // app.use(cors({ credentials: true }));
 
 app.use(cors({
-  origin: allowedCors,
+  origin: 'https://mesto.by.vlad.nomorepartiesxyz.ru',
   credentials: true,
 }));
 
