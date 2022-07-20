@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import Header from './Header/Header';
@@ -198,8 +198,8 @@ function App() {
 	// }, [loggedIn, history]);
 
 	function checkToken() {
-		if (localStorage.getItem('token')) {
-			const token = localStorage.getItem('token')
+		if (localStorage.getItem('jwt')) {
+			const token = localStorage.getItem('jwt')
 			getContent(token)
 				.then((res) => {
 					if (res) {
@@ -232,11 +232,11 @@ function App() {
 	function handleLogin(email, password) {
 		setChangeLoginBtnName('Вход...');
 		return authorize(email, password)
-			.then((res) => {
-				if(res.data.token) {
-					localStorage.setItem('jwt', res.data.token);
+			.then((data) => {
+				if(data.token) {
+					localStorage.setItem('jwt', data.token);
 					checkToken();
-					setEmail(res.data.email);
+					setEmail(data.email);
 					setLoggedIn(true);
 					history.push('/');
 				} else {
