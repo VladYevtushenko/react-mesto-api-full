@@ -6,7 +6,7 @@
 
 # Ссылки
 
-IP-адрес: 84.201.164.77
+IP-адрес: 51.250.103.32
 
 Фронтенд: https://mesto.by.vlad.nomorepartiesxyz.ru
 
