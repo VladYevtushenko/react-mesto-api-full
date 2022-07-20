@@ -57,7 +57,7 @@ function App() {
 			.catch((err) => console.log(err));
 	}, [loggedIn]);
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+	
 	useEffect(() => checkToken(), [loggedIn])
 // ava
 
@@ -198,8 +198,8 @@ function App() {
 	// }, [loggedIn, history]);
 
 	function checkToken() {
-		if (localStorage.getItem('token')) {
-			const token = localStorage.getItem('token')
+		if (localStorage.getItem('jwt')) {
+			const token = localStorage.getItem('jwt')
 			getContent(token)
 				.then((res) => {
 					if (res) {
