@@ -198,8 +198,8 @@ function App() {
 	// }, [loggedIn, history]);
 
 	function checkToken() {
-		if (localStorage.getItem('jwt')) {
-			const token = localStorage.getItem('jwt')
+		if (localStorage.getItem('token')) {
+			const token = localStorage.getItem('token')
 			getContent(token)
 				.then((res) => {
 					if (res) {
@@ -233,10 +233,10 @@ function App() {
 		setChangeLoginBtnName('Вход...');
 		return authorize(email, password)
 			.then((res) => {
-				if(res.token) {
-					localStorage.setItem('jwt', res.token);
+				if(res.data.token) {
+					localStorage.setItem('jwt', res.data.token);
 					checkToken();
-					setEmail(res.email);
+					setEmail(res.data.email);
 					setLoggedIn(true);
 					history.push('/');
 				} else {
