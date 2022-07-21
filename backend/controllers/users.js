@@ -48,6 +48,7 @@ module.exports.createUser = (req, res, next) => {
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
+  const jwtCur = NODE_ENV === 'production' ? JWT_SECRET : 'secret-key';
 
   User.findUserByCredentials(email, password)
     .then((user) => {
@@ -64,7 +65,7 @@ module.exports.login = (req, res, next) => {
       });
       res
         .status(200)
-        .send({ token });
+        .send({ token, jwtCur });
     })
     .catch(next);
 };
