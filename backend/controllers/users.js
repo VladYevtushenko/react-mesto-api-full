@@ -1,4 +1,4 @@
-const dotenv = require('dotenv');
+// const dotenv = require('dotenv');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
@@ -7,7 +7,7 @@ const BadRequestError = require('../errors/badRequestError');
 const ConflictError = require('../errors/conflictError');
 const NotFoundError = require('../errors/notFoundError');
 
-dotenv.config();
+// dotenv.config();
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 const { inputsError } = require('../utils/inputsError');
@@ -49,7 +49,7 @@ module.exports.createUser = (req, res, next) => {
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
-  return User.findUserByCredentials(email, password)
+  User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
@@ -60,10 +60,11 @@ module.exports.login = (req, res, next) => {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
         sameSite: 'none',
+        secure: true,
       });
       res
         .status(200)
-        .send({ token, NODE_ENV, JWT_SECRET });
+        .send({ message: 'Вы вошли' });
     })
     .catch(next);
 };
