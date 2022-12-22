@@ -8,6 +8,6 @@
 
 IP-адрес: 51.250.103.32
 
-Фронтенд: https://mesto.by.vlad.nomorepartiesxyz.ru
+Фронтенд: https://mesto.by.vlad.nomorepartiesxyz.ru (vm stopped at the moment)
 
 Бэкенд: https://api.mesto.by.vlad.nomoredomains.xyz
